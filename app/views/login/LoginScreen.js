@@ -10,6 +10,7 @@ import Colors from "../../utils/Colors";
 import {login} from "../../actions/AppActions";
 import {connect} from 'react-redux';
 import Common from "../../utils/Common";
+import {ScreenName} from "../navigator/AppNavigator";
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class LoginScreen extends Component {
                 <TouchableOpacity style={styles.loginButton} onPress={this.onClickLogin}>
                     <Text>Login</Text>
                 </TouchableOpacity>
+                <Text>{`IsLogin: ${this.props.isLogin}`}</Text>
             </View>
         );
     }
@@ -35,6 +37,7 @@ class LoginScreen extends Component {
     onClickLogin = () => {
         // Validate here
         this.props.onClickLogin(this.state.email, this.state.password);
+        this.props.navigation.navigate(ScreenName.HomeScreen);
     };
 }
 
@@ -62,8 +65,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        email: state.email,
-        password: state.password
+        isLogin: state.LoginReducer.isLogin
     }
 };
 

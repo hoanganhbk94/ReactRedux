@@ -3,14 +3,25 @@ import AlertManager from "../utils/AlertManager";
 
 const initialState = {
     "email": '',
-    "password": ''
+    "password": '',
+    'isLogin': false
 };
 
 const LoginReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.LOGIN:
-            AlertManager.showAlert("Login", action.email + action.password);
+            if (action.email === 'Test' && action.password === '123') {
+                return {
+                    email: action.email,
+                    password: action.password,
+                    isLogin: true
+                };
+            }
             return state;
+        case ActionTypes.LOGOUT:
+            return {
+
+            };
         default:
             return state;
     }

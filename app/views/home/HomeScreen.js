@@ -30,6 +30,8 @@ class HomeScreen extends Component {
 
     onLogOutClick = () => {
         this.props.logOutClick();
+        // Callback
+        this.props.navigation.goBack();
     };
 }
 
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    AlertManager.showAlert("a", JSON.stringify(state));
     return {
         isLogin: state.LoginReducer.isLogin
     }

@@ -10,7 +10,7 @@ const initialState = {
 const LoginReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.LOGIN:
-            if (action.email === 'Test' && action.password === '123') {
+            if (action.email === 'Test@gmail.com' && action.password === '123456') {
                 return {
                     email: action.email,
                     password: action.password,
@@ -19,9 +19,7 @@ const LoginReducer = (state = initialState, action) => {
             }
             return state;
         case ActionTypes.LOGOUT:
-            return {
-
-            };
+            return {...state, isLogin: false};
         default:
             return state;
     }

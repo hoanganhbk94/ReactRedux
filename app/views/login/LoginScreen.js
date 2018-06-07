@@ -11,6 +11,9 @@ import {login} from "../../actions/AppActions";
 import {connect} from 'react-redux';
 import Common from "../../utils/Common";
 import {ScreenName} from "../navigator/AppNavigator";
+import Validation from "../../utils/Validation";
+import Log from "../../utils/Log";
+import AlertManager from "../../utils/AlertManager";
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -35,9 +38,16 @@ class LoginScreen extends Component {
     }
 
     onClickLogin = () => {
-        // Validate here
-        this.props.onClickLogin(this.state.email, this.state.password);
-        this.props.navigation.navigate(ScreenName.HomeScreen);
+        if (!Validation.isEmail(this.state.email)) {
+            AlertManager.showAlert("Warning", "Email is not valid");
+        } else if (!Validation.isPassword(this.state.password)) {
+            AlertManager.showAlert("Warning", "Password is not enough characters");
+        } else {
+            this.props.onClickLogin(this.state.email, this.state.password);
+            // If isLogin = true
+            this.props.navigation.navigate(ScreenName.HomeScreen);
+            // else do nothing
+        }
     };
 }
 

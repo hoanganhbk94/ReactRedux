@@ -6,9 +6,10 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
-import Colors from "../../common/Colors";
+import Colors from "../../utils/Colors";
 import {login} from "../../actions/AppActions";
 import {connect} from 'react-redux';
+import Common from "../../utils/Common";
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -22,9 +23,9 @@ class LoginScreen extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <TextInput/>
-                <TextInput/>
-                <TouchableOpacity onPress={this.onClickLogin}>
+                <TextInput style={styles.textInput} onChangeText={(email) => this.setState({email})}/>
+                <TextInput style={styles.textInput} onChangeText={(password) => this.setState({password})}/>
+                <TouchableOpacity style={styles.loginButton} onPress={this.onClickLogin}>
                     <Text>Login</Text>
                 </TouchableOpacity>
             </View>
@@ -32,6 +33,7 @@ class LoginScreen extends Component {
     }
 
     onClickLogin = () => {
+        // Validate here
         this.props.onClickLogin(this.state.email, this.state.password);
     };
 }
@@ -40,6 +42,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.mainColor,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textInput: {
+        height: 40,
+        width: Common.window.width - 30,
+        backgroundColor: 'white',
+        marginBottom: 20
+    },
+    loginButton: {
+        backgroundColor: 'gray',
+        width: Common.window.width - 30,
+        height: 40,
         justifyContent: 'center',
         alignItems: 'center'
     }

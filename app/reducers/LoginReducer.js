@@ -1,5 +1,5 @@
 import { ActionTypes } from '../actions/AppActions';
-import AlertManager from "../common/AlertManager";
+import AlertManager from "../utils/AlertManager";
 
 const initialState = {
     "email": '',
@@ -9,7 +9,7 @@ const initialState = {
 const LoginReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.LOGIN:
-            AlertManager.showAlert("Login", "Click login");
+            AlertManager.showAlert("Login", action.email + action.password);
             return state;
         default:
             return state;

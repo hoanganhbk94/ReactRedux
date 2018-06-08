@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {getAllUsers, logout} from "../../actions/AppActions";
+import ProgressHUD from "../hud/ProgressHUD";
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class HomeScreen extends Component {
                     data={this.props.users}
                     renderItem={({item}) => <Text>{item.name}</Text>}
                 />
+                { this.props.showProgress && <ProgressHUD/> }
             </View>
         );
     }
@@ -45,7 +47,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        users: state.HomeReducer.users
+        users: state.HomeReducer.users,
+        showProgress: state.HomeReducer.showProgress
     }
 };
 

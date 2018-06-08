@@ -12,5 +12,5 @@ function* getAllUser() {
 }
 
 export function* listenFetchUsers() {
-    yield takeEvery(ActionTypes.GET_USERS, getAllUser);
+    yield takeLatest(ActionTypes.GET_USERS, getAllUser);
 }

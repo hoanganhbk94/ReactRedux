@@ -19,16 +19,16 @@ class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: ''
+            email: 'test@gamil.com',
+            password: '123456'
         }
     }
 
     render() {
         return(
             <View style={styles.container}>
-                <TextInput style={styles.textInput} placeholder={'Email'} onChangeText={(email) => this.setState({email})}/>
-                <TextInput style={styles.textInput} placeholder={'Password'} onChangeText={(password) => this.setState({password})}/>
+                <TextInput style={styles.textInput} placeholder={'Email'} value={this.state.email} onChangeText={(email) => this.setState({email})}/>
+                <TextInput style={styles.textInput} placeholder={'Password'} value={this.state.password} onChangeText={(password) => this.setState({password})}/>
                 <TouchableOpacity style={styles.loginButton} onPress={this.onClickLogin}>
                     <Text>Login</Text>
                 </TouchableOpacity>

@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {logout} from "../../actions/AppActions";
-import AlertManager from "../../utils/AlertManager";
 
 class HomeScreen extends Component {
     constructor(props) {

@@ -2,9 +2,10 @@ import { ActionTypes } from '../actions/AppActions';
 import AlertManager from "../utils/AlertManager";
 
 const initialState = {
-    "email": '',
-    "password": '',
-    'isLogin': false
+    email: '',
+    password: '',
+    isLogin: false,
+    showProgress: false
 };
 
 const LoginReducer = (state = initialState, action) => {

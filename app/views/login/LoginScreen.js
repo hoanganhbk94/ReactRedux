@@ -12,8 +12,8 @@ import {connect} from 'react-redux';
 import Common from "../../utils/Common";
 import {ScreenName} from "../navigator/AppNavigator";
 import Validation from "../../utils/Validation";
-import Log from "../../utils/Log";
 import AlertManager from "../../utils/AlertManager";
+import ProgressHUD from "../hud/ProgressHUD";
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -27,12 +27,12 @@ class LoginScreen extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <TextInput style={styles.textInput} onChangeText={(email) => this.setState({email})}/>
-                <TextInput style={styles.textInput} onChangeText={(password) => this.setState({password})}/>
+                <TextInput style={styles.textInput} placeholder={'Email'} onChangeText={(email) => this.setState({email})}/>
+                <TextInput style={styles.textInput} placeholder={'Password'} onChangeText={(password) => this.setState({password})}/>
                 <TouchableOpacity style={styles.loginButton} onPress={this.onClickLogin}>
                     <Text>Login</Text>
                 </TouchableOpacity>
-                <Text>{`IsLogin: ${this.props.isLogin}`}</Text>
+                { this.props.showProgress && <ProgressHUD/> }
             </View>
         );
     }
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         height: 40,
         width: Common.window.width - 30,
         backgroundColor: 'white',
-        marginBottom: 20
+        marginBottom: 20,
+        paddingLeft: 10
     },
     loginButton: {
         backgroundColor: 'gray',
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        isLogin: state.LoginReducer.isLogin
+        showProgress: state.LoginReducer.showProgress
     }
 };
 

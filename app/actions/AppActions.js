@@ -1,6 +1,8 @@
 export class ActionTypes {
-    static LOGIN = 'LOGIN';
-    static LOGOUT = 'LOGOUT';
+    static LOGIN                = 'LOGIN';
+    static LOGIN_SUCCESS        = 'LOGIN_SUCCESS';
+    static LOGIN_FAIL           = 'LOGIN_FAIL';
+    static LOGOUT               = 'LOGOUT';
 }
 
 export const login = (email, password) => {

@@ -6,11 +6,15 @@
 
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import AppNavigator from "./views/navigator/AppNavigator";
 import AppReducers from "./reducers/AppReducers";
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from "./sagas/RootSaga";
 
-const store = createStore(AppReducers);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(AppReducers, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 export default class App extends Component {
     render() {
         return (
@@ -20,3 +24,4 @@ export default class App extends Component {
         );
     }
 }
+

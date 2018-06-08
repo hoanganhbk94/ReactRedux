@@ -3,35 +3,35 @@ import {
     View,
     StyleSheet,
     Text,
-    TouchableOpacity
+    FlatList
 } from 'react-native';
 import {connect} from 'react-redux';
-import {logout} from "../../actions/AppActions";
+import {getAllUsers, logout} from "../../actions/AppActions";
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isLogin: false
-        }
+        };
+        this.fetchDataFromServer();
     }
 
     render() {
         return(
             <View style={styles.container}>
-                <Text>{`${this.props.isLogin}`}</Text>
-                <TouchableOpacity onPress={this.onLogOutClick}>
-                    <Text>LOGOUT</Text>
-                </TouchableOpacity>
+                <FlatList
+                    style={{flex: 1}}
+                    data={this.props.users}
+                    renderItem={({item}) => <Text>{item.name}</Text>}
+                />
             </View>
         );
     }
 
-    onLogOutClick = () => {
-        this.props.logOutClick();
-        // Callback
-        this.props.navigation.goBack();
-    };
+    fetchDataFromServer() {
+        this.props.fetchUserData();
+    }
 }
 
 const styles = StyleSheet.create({
@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        isLogin: state.LoginReducer.isLogin
+        users: state.HomeReducer.users
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        logOutClick: () => {
-            dispatch(logout())
+        fetchUserData: () => {
+            dispatch(getAllUsers());
         }
     }
 };

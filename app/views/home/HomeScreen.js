@@ -2,19 +2,16 @@ import React, {Component} from 'react';
 import {
     View,
     StyleSheet,
-    Text,
     FlatList
 } from 'react-native';
 import {connect} from 'react-redux';
-import {getAllUsers, logout} from "../../actions/AppActions";
+import {getAllUsers} from "../../actions/AppActions";
 import ProgressHUD from "../hud/ProgressHUD";
+import UserItemView from "./UserItemView";
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isLogin: false
-        };
         this.fetchDataFromServer();
     }
 
@@ -24,7 +21,8 @@ class HomeScreen extends Component {
                 <FlatList
                     style={{flex: 1}}
                     data={this.props.users}
-                    renderItem={({item}) => <Text>{item.name}</Text>}
+                    keyExtractor={(item, index) => item.id.toString()}
+                    renderItem={({item}) => <UserItemView item={item}/>}
                 />
                 { this.props.showProgress && <ProgressHUD/> }
             </View>
